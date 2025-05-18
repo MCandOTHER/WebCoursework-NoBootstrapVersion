@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lobby</title>
+  <link rel="stylesheet" href="./bootstrap.css">
+  <style>
+    body {
+      background-image: url(background.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .welcome-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      border-radius: 5px;
+      z-index: 1000;
+      display: none;
+      text-align: center;
+      font-size: 2vw
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+        display: none;
+      }
+    }
+    /* 评价区域前的标题 */
+    .before-review-title {
+      margin-top: 10%;
+      position: relative;
+      top: 10%;
+      /* 上边留有一定的空间 */
+      width: 70%;
+      /* 宽度占页面80% */
+      margin: 0 auto;
+      /* 居中显示 */
+      background-color: rgba(255, 255, 255, 0.9);
+      /* 略微半透明 */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 2vw;
+      font: bolder;
+    }
+
+    /* 评价区域样式 */
+    .review-area {
+      position: relative;
+      top: 15%;
+      /* 上边留有一定的空间 */
+      width: 70%;
+      /* 宽度占页面80% */
+      margin: 0 auto;
+      /* 居中显示 */
+      background-color: rgba(255, 255, 255, 0.9);
+      /* 略微半透明 */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 单个评价样式 */
+    .review {
+      border-bottom: 1px solid #eee;
+      /* 分隔线 */
+      padding: 10px 0;
+    }
+
+    /* 最后一个评价不显示分隔线 */
+    .review:last-child {
+      border-bottom: none;
+    }
+    
+
+    /* 用户信息样式 */
+    .user-info {
+      font-size: 1.5vw;
+      font-weight: bold;
+    }
+
+    /* 餐厅名称样式 */
+    .restaurant-name {
+      font-size: 1.2vw;
+    }
+
+    /* 评分样式 */
+    .rating {
+      color: #ff9900;
+    }
+
+    /* 评价主体样式 */
+    .review-body {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- welcome message -->
+  <div id="welcomeMessage" class="welcome-message">
+    Welcome to the restaurant review system!
+  </div>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Cafeteria Evaluation Website</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="lobby.html">Lobby<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">🔥Top Views🔥</a></li>
+        </ul>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Explore">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">My Information</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- 评价区域 -->
+  <div class="before-review-title">
+    🔥Latest Reviews🔥
+  </div>
+  <div id="reviewArea" class="review-area">
+    <!-- 动态插入评价内容 -->
+  </div>
+
+
+  <!-- main content -->
+
+
+
+  </div>
+</body>
+<script>
+  // 欢迎
+  document.addEventListener('DOMContentLoaded', function () {
+    var welcomeMessage = document.getElementById('welcomeMessage');
+    welcomeMessage.style.display = 'block';
+    // 1秒后淡出
+    setTimeout(function () {
+      welcomeMessage.classList.add('fade-out');
+    }, 1000);
+  });
+
+  // 假设这是从后端获取的评价数据
+  var reviews = [
+    { user: "Bob", restaurant:"steakhouse",rating: 4.5, review: "This restaurant is the best for me! The food is delicious and the service is top-notch. The ambiance is also great." },
+    { user: "Tom", restaurant:"pizza place",rating: 3.8, review: "The food is delicious but the service is not good. The waiter is rude and the food is not fresh. Overall, I would not recommend this restaurant." },
+    // 更多评价...
+  ];
+  // 动态插入评价内容到页面
+  function displayReviews(reviews) {
+    var reviewArea = document.getElementById('reviewArea');
+    reviewArea.innerHTML = ''; // 清空之前的评价
+
+    reviews.forEach(function (review) {
+      var reviewDiv = document.createElement('div');
+      reviewDiv.className = 'review';
+      reviewDiv.innerHTML = `
+      <div class="user-info">${review.user}</div>
+      <div class="restaurant-name">Restaurant: ${review.restaurant}</div>
+      <div class="rating">Rating: ${review.rating}</div>
+      <div class="review-body">    ${review.review}</div>
+    `;
+      reviewArea.appendChild(reviewDiv);
+    });
+  }
+
+  // 调用函数，显示评价
+  displayReviews(reviews);
+
+  // 假设这是用于实时更新评价内容的函数
+  function updateReviews(newReviews) {
+    // 更新评价数据
+    reviews = newReviews;
+    // 重新显示评价
+    displayReviews(reviews);
+  }
+
+</script>
+
+</html>

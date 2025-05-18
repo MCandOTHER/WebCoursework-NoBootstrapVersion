@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- 导航栏头部（用于移动端折叠按钮） -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#custom-navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- 导航链接分组（居左内容） -->
+      <div class="collapse navbar-collapse" id="custom-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="./index.html">Lobby</a></li>
+          <li><a href="https://github.com/MCandOTHER" target="_blank">MyGithub</a></li>
+          <li><a href="./quiz.html">Game</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <button id="modeToggle" class="btn btn-default navbar-btn" style="margin-left:10px;">🌙 Dark Mode</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 自我介绍卡片 -->
+  <div
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none;">
+    <div id="introCard"
+      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:75%; max-width:900px; min-height:350px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s;">
+      <!-- 左侧：个人基本信息 -->
+      <div
+        style="flex:1; padding:40px 30px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="margin-top:0; text-align:center; width:100%;">My Information</h2>
+        <ul style="list-style:none; padding:0; font-size:18px;">
+          <li><strong>Name: </strong>Wenrui Ma</li>
+          <li><strong>Major: </strong>AI</li>
+          <li><strong>School: </strong>SCNU & UoA</li>
+          <li><strong>Target: </strong>To be a good programmer</li>
+        </ul>
+      </div>
+      <!-- 右侧：兴趣爱好等 -->
+      <div
+        style="flex:1; padding:40px 30px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="margin-top:0; text-align:center; width:100%;">My Hobbies</h2>
+        <ul style="list-style:none; padding:0; font-size:18px;">
+          <li>🎵 Listening to music</li>
+          <li>📚 Reading novels</li>
+          <li>🏸 Playing Badminbton</li>
+          <li>💻 Coding</li>
+          <li>🎮 Playing video games</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  const DarkBg = "#0d1117";
+  const DarkText = "#c9d1d9";
+  const LightBg = "#ffffff";
+  const LightText = "#24292f";
+
+
+  const btn = document.getElementById('modeToggle');
+  const introCard = document.getElementById('introCard');
+  function setDarkMode(on) {
+    if (on) {
+      document.body.style.background = DarkBg;
+      document.body.style.color = DarkText;
+      document.querySelector('.navbar').classList.remove('navbar-default');
+      document.querySelector('.navbar').classList.add('navbar-inverse');
+      btn.textContent = "☀️ Light Mode";
+      btn.classList.remove('btn-default');
+      btn.classList.add('btn-warning');
+      // 导航栏字体颜色
+      document.querySelectorAll('.navbar-inverse .navbar-nav>li>a').forEach(a => {
+        a.style.color = DarkText;
+      });
+      document.querySelector('.navbar-inverse .navbar-brand').style.color = DarkText;
+      // 基本信息卡片深色
+      introCard.style.background = DarkBg;
+      introCard.style.color = DarkText;
+    } else {
+      document.body.style.background = LightBg;
+      document.body.style.color = LightText;
+      document.querySelector('.navbar').classList.remove('navbar-inverse');
+      document.querySelector('.navbar').classList.add('navbar-default');
+      btn.textContent = "🌙 Dark Mode";
+      btn.classList.remove('btn-warning');
+      btn.classList.add('btn-default');
+      // 恢复导航栏字体颜色
+      document.querySelectorAll('.navbar-default .navbar-nav>li>a').forEach(a => {
+        a.style.color = "";
+      });
+      document.querySelector('.navbar-default .navbar-brand').style.color = "";
+      // 基本信息卡片浅色
+      introCard.style.background = LightBg;
+      introCard.style.color = LightText;
+    }
+  }
+
+  let dark = false;
+  btn.onclick = function () {
+    dark = !dark;
+    setDarkMode(dark);
+  };
+  setDarkMode(false);
+</script>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "responsive-bootstrap-app",
+  "version": "1.0.0",
+  "description": "A simple responsive Bootstrap 3 website framework",
+  "scripts": {
+    "start": "http-server ./public -p 3000 -c-1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "http-server": "^14.1.1"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

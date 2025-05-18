@@ -1,0 +1,35 @@
+# Node.js 依赖
+node_modules/
+
+# 日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VSCode 配置
+.vscode/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 生产/构建输出（如有）
+dist/
+build/
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+
+# 环境变量
+.env
+.env.local
+
+# 其他常见忽略
+.idea/
+*.log
+
+# 个人图片或大文件（如有上传）
+public/img/profile.jpg
