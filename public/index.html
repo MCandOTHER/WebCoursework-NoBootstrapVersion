@@ -44,40 +44,50 @@
   <div
     style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none;">
     <div id="introCard"
-      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:75%; max-width:900px; min-height:350px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s;">
+      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:67.5%; max-width:810px; min-height:315px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:16px;">
       <!-- 左侧：个人基本信息 -->
       <div
         style="flex:1; padding:40px 30px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
         <h2 style="margin-top:0; text-align:center; width:100%;">My Information</h2>
-        <ul style="list-style:none; padding:0; font-size:18px;">
+        <ul style="list-style:none; padding:0; font-size:16px;">
           <li><strong>Name: </strong>Wenrui Ma</li>
           <li><strong>Major: </strong>AI</li>
           <li><strong>School: </strong>SCNU & UoA</li>
           <li><strong>Target: </strong>To be a good programmer</li>
         </ul>
       </div>
-      <!-- 右侧：兴趣爱好等 -->
+      <!-- 右侧：兴趣爱好 -->
       <div
         style="flex:1; padding:40px 30px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
         <h2 style="margin-top:0; text-align:center; width:100%;">My Hobbies</h2>
-        <ul style="list-style:none; padding:0; font-size:18px;">
+        <ul style="list-style:none; padding:0; font-size:16px;">
           <li>🎵 Listening to music</li>
           <li>📚 Reading novels</li>
           <li>🏸 Playing Badminbton</li>
           <li>💻 Coding</li>
+          <li>😇 Struggling to learn CTF</li>
           <li>🎮 Playing video games</li>
         </ul>
       </div>
     </div>
   </div>
+
+  <!-- 手风琴效果展示自我介绍内容的图片 -->
+  <div class="AccordionPicture">
+    <img src="" alt="">
+  </div>
+
+  
 </body>
 
 <script>
-  const DarkBg = "#0d1117";
+  const DarkBg = "linear-gradient(135deg, #23272f 0%, #0d1117 100%)";
   const DarkText = "#c9d1d9";
   const LightBg = "#ffffff";
   const LightText = "#24292f";
 
+  const CardLightBg = "#f3f4f6";
+  const CardDarkBg = "#22272e";
 
   const btn = document.getElementById('modeToggle');
   const introCard = document.getElementById('introCard');
@@ -90,13 +100,7 @@
       btn.textContent = "☀️ Light Mode";
       btn.classList.remove('btn-default');
       btn.classList.add('btn-warning');
-      // 导航栏字体颜色
-      document.querySelectorAll('.navbar-inverse .navbar-nav>li>a').forEach(a => {
-        a.style.color = DarkText;
-      });
-      document.querySelector('.navbar-inverse .navbar-brand').style.color = DarkText;
-      // 基本信息卡片深色
-      introCard.style.background = DarkBg;
+      introCard.style.background = CardDarkBg;
       introCard.style.color = DarkText;
     } else {
       document.body.style.background = LightBg;
@@ -106,13 +110,7 @@
       btn.textContent = "🌙 Dark Mode";
       btn.classList.remove('btn-warning');
       btn.classList.add('btn-default');
-      // 恢复导航栏字体颜色
-      document.querySelectorAll('.navbar-default .navbar-nav>li>a').forEach(a => {
-        a.style.color = "";
-      });
-      document.querySelector('.navbar-default .navbar-brand').style.color = "";
-      // 基本信息卡片浅色
-      introCard.style.background = LightBg;
+      introCard.style.background = CardLightBg;
       introCard.style.color = LightText;
     }
   }
