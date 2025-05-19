@@ -10,6 +10,73 @@
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 
+<script>
+  const DarkBg = "linear-gradient(135deg, #23272f 0%, #0d1117 100%)";
+  const DarkText = "#c9d1d9";
+  const LightBg = "#ffffff";
+  const LightText = "#24292f";
+
+  const CardLightBg = "#f3f4f6";
+  const CardDarkBg = "#22272e";
+
+  const btn = document.getElementById('modeToggle');
+  const introCard = document.getElementById('introCard');
+  function setDarkMode(on) {
+    if (on) {
+      document.body.style.background = DarkBg;
+      document.body.style.color = DarkText;
+      document.querySelector('.navbar').classList.remove('navbar-default');
+      document.querySelector('.navbar').classList.add('navbar-inverse');
+      btn.textContent = "☀️ Light Mode";
+      btn.classList.remove('btn-default');
+      btn.classList.add('btn-warning');
+      introCard.style.background = CardDarkBg;
+      introCard.style.color = DarkText;
+    } else {
+      document.body.style.background = LightBg;
+      document.body.style.color = LightText;
+      document.querySelector('.navbar').classList.remove('navbar-inverse');
+      document.querySelector('.navbar').classList.add('navbar-default');
+      btn.textContent = "🌙 Dark Mode";
+      btn.classList.remove('btn-warning');
+      btn.classList.add('btn-default');
+      introCard.style.background = CardLightBg;
+      introCard.style.color = LightText;
+    }
+  }
+
+  let dark = false;
+  btn.onclick = function () {
+    dark = !dark;
+    setDarkMode(dark);
+  };
+  setDarkMode(false);
+
+  // 整页滚动效果
+  let isScrolling = false;
+  window.addEventListener('wheel', function (e) {
+    if (isScrolling) return;
+    isScrolling = true;
+
+    const direction = e.deltaY > 0 ? 1 : -1;
+    const vh = window.innerHeight;
+    const curr = window.scrollY;
+    // 计算目标位置
+    let target = Math.round(curr / vh) * vh + direction * vh;
+    // 限制在页面范围内
+    target = Math.max(0, Math.min(target, document.body.scrollHeight - vh));
+
+    window.scrollTo({
+      top: target,
+      behavior: 'smooth'
+    });
+
+    // 等待滚动动画结束再允许下一次滚动
+    setTimeout(() => { isScrolling = false; }, 600);
+    e.preventDefault();
+  }, { passive: false });
+</script>
+
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -77,50 +144,9 @@
     <img src="" alt="">
   </div>
 
-  
+
 </body>
 
-<script>
-  const DarkBg = "linear-gradient(135deg, #23272f 0%, #0d1117 100%)";
-  const DarkText = "#c9d1d9";
-  const LightBg = "#ffffff";
-  const LightText = "#24292f";
 
-  const CardLightBg = "#f3f4f6";
-  const CardDarkBg = "#22272e";
-
-  const btn = document.getElementById('modeToggle');
-  const introCard = document.getElementById('introCard');
-  function setDarkMode(on) {
-    if (on) {
-      document.body.style.background = DarkBg;
-      document.body.style.color = DarkText;
-      document.querySelector('.navbar').classList.remove('navbar-default');
-      document.querySelector('.navbar').classList.add('navbar-inverse');
-      btn.textContent = "☀️ Light Mode";
-      btn.classList.remove('btn-default');
-      btn.classList.add('btn-warning');
-      introCard.style.background = CardDarkBg;
-      introCard.style.color = DarkText;
-    } else {
-      document.body.style.background = LightBg;
-      document.body.style.color = LightText;
-      document.querySelector('.navbar').classList.remove('navbar-inverse');
-      document.querySelector('.navbar').classList.add('navbar-default');
-      btn.textContent = "🌙 Dark Mode";
-      btn.classList.remove('btn-warning');
-      btn.classList.add('btn-default');
-      introCard.style.background = CardLightBg;
-      introCard.style.color = LightText;
-    }
-  }
-
-  let dark = false;
-  btn.onclick = function () {
-    dark = !dark;
-    setDarkMode(dark);
-  };
-  setDarkMode(false);
-</script>
 
 </html>
