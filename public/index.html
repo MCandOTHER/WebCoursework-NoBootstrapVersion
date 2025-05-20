@@ -8,77 +8,11 @@
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<script>
-  const DarkBg = "linear-gradient(135deg, #23272f 0%, #0d1117 100%)";
-  const DarkText = "#c9d1d9";
-  const LightBg = "#ffffff";
-  const LightText = "#24292f";
-
-  const CardLightBg = "#f3f4f6";
-  const CardDarkBg = "#22272e";
-
-  const btn = document.getElementById('modeToggle');
-  const introCard = document.getElementById('introCard');
-  function setDarkMode(on) {
-    if (on) {
-      document.body.style.background = DarkBg;
-      document.body.style.color = DarkText;
-      document.querySelector('.navbar').classList.remove('navbar-default');
-      document.querySelector('.navbar').classList.add('navbar-inverse');
-      btn.textContent = "☀️ Light Mode";
-      btn.classList.remove('btn-default');
-      btn.classList.add('btn-warning');
-      introCard.style.background = CardDarkBg;
-      introCard.style.color = DarkText;
-    } else {
-      document.body.style.background = LightBg;
-      document.body.style.color = LightText;
-      document.querySelector('.navbar').classList.remove('navbar-inverse');
-      document.querySelector('.navbar').classList.add('navbar-default');
-      btn.textContent = "🌙 Dark Mode";
-      btn.classList.remove('btn-warning');
-      btn.classList.add('btn-default');
-      introCard.style.background = CardLightBg;
-      introCard.style.color = LightText;
-    }
-  }
-
-  let dark = false;
-  btn.onclick = function () {
-    dark = !dark;
-    setDarkMode(dark);
-  };
-  setDarkMode(false);
-
-  // 整页滚动效果
-  let isScrolling = false;
-  window.addEventListener('wheel', function (e) {
-    if (isScrolling) return;
-    isScrolling = true;
-
-    const direction = e.deltaY > 0 ? 1 : -1;
-    const vh = window.innerHeight;
-    const curr = window.scrollY;
-    // 计算目标位置
-    let target = Math.round(curr / vh) * vh + direction * vh;
-    // 限制在页面范围内
-    target = Math.max(0, Math.min(target, document.body.scrollHeight - vh));
-
-    window.scrollTo({
-      top: target,
-      behavior: 'smooth'
-    });
-
-    // 等待滚动动画结束再允许下一次滚动
-    setTimeout(() => { isScrolling = false; }, 600);
-    e.preventDefault();
-  }, { passive: false });
-</script>
-
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- 导航栏头部（用于移动端折叠按钮） -->
       <div class="navbar-header">
@@ -95,6 +29,7 @@
       <div class="collapse navbar-collapse" id="custom-navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="./index.html">Lobby</a></li>
+          <li><a href="./about.html">About Me</a></li>
           <li><a href="https://github.com/MCandOTHER" target="_blank">MyGithub</a></li>
           <li><a href="./quiz.html">Game</a></li>
         </ul>
@@ -107,29 +42,38 @@
     </div>
   </nav>
 
+  <!-- 欢饮信息 -->
+  <div id="welcomeMessage" class="welcome-message">
+    Welcome to my Website !
+  </div>
+
   <!-- 自我介绍卡片 -->
   <div
-    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none;">
+    style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin-top: 8%;">
     <div id="introCard"
-      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:67.5%; max-width:810px; min-height:315px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:16px;">
+      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:36px;">
       <!-- 左侧：个人基本信息 -->
       <div
-        style="flex:1; padding:40px 30px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <h2 style="margin-top:0; text-align:center; width:100%;">My Information</h2>
-        <ul style="list-style:none; padding:0; font-size:16px;">
+        style="flex:1; padding:50px 40px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">My Information
+        </h2>
+        <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
           <li><strong>Name: </strong>Wenrui Ma</li>
+          <li><strong>Gender: </strong>Male</li>
           <li><strong>Major: </strong>AI</li>
           <li><strong>School: </strong>SCNU & UoA</li>
-          <li><strong>Target: </strong>To be a good programmer</li>
+          <li><strong>Target: </strong>To be a Fullstack developer</li>
+          <li><strong>What's up: </strong>Studing FastAPI</li>
         </ul>
       </div>
       <!-- 右侧：兴趣爱好 -->
       <div
-        style="flex:1; padding:40px 30px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <h2 style="margin-top:0; text-align:center; width:100%;">My Hobbies</h2>
-        <ul style="list-style:none; padding:0; font-size:16px;">
+        style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">My Hobbies
+        </h2>
+        <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
           <li>🎵 Listening to music</li>
-          <li>📚 Reading novels</li>
+          <li>📚 Reading Sci-fi novels</li>
           <li>🏸 Playing Badminbton</li>
           <li>💻 Coding</li>
           <li>😇 Struggling to learn CTF</li>
@@ -139,14 +83,15 @@
     </div>
   </div>
 
-  <!-- 手风琴效果展示自我介绍内容的图片 -->
-  <div class="AccordionPicture">
-    <img src="" alt="">
+
+  <!-- 自我介绍卡片下方的小字提示 -->
+  <div
+    style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 24px; color: #999; text-align: center; width: 100%;">
+    <p> Try the buttons on the page！ </p>
   </div>
 
 
+  <script src="./js/scripts.js"></script>
 </body>
-
-
 
 </html>

@@ -1,33 +1,57 @@
 body {
   background: #f7f9fa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-top: 70px;
+  /* 为固定导航栏留出空间 */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: background-image 0.6s ease-in-out;
 }
-.card, .sidebar-card {
+
+/* 浅色模式背景 */
+body.light-mode {
+  background-image: url('../img/Light-bg.jpg');
+}
+
+/* 深色模式背景 */
+body.dark-mode {
+  background-image: url('../img/Dark-bg.jpg');
+}
+
+.card,
+.sidebar-card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   padding: 30px 20px;
   margin: 30px 0;
   transition: box-shadow 0.3s;
 }
-.card:hover, .sidebar-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+
+.card:hover,
+.sidebar-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
 }
+
 .profile-img {
   width: 120px;
   height: 120px;
   object-fit: cover;
   margin-bottom: 15px;
 }
+
 .footer {
   background: #e9ecef;
   padding: 20px 0;
   margin-top: 40px;
 }
+
 .tags {
   list-style: none;
   padding: 0;
 }
+
 .tags li {
   display: inline-block;
   background: #e3f2fd;
@@ -37,8 +61,167 @@ body {
   margin: 2px 4px;
   font-size: 13px;
 }
+
 .Accordion {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+
+/* 图片聚焦放大 */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.focus-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 0.5s ease-out;
+}
+
+.image-container:hover .focus-image {
+  transform: scale(1.2);
+}
+
+
+/* 左图右文展示 */
+.symmetrical-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 60px auto;
+  font-size: 1.25rem;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+  width: calc(50% - 1rem);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 图片容器样式调整 */
+.image-container {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.focus-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 0.5s ease-out;
+}
+
+.right-column {
+  justify-content: center;
+  padding: 0 20px;
+  text-align: left;
+}
+
+/* 响应式调整,ai推荐 */
+@media (max-width: 900px) {
+  .symmetrical-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .image-container {
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .right-column {
+    padding: 0;
+  }
+}
+
+
+/* 欢迎信息 */
+.welcome-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  display: none;
+  text-align: center;
+  font-size: 2vw;
+  transition: opacity 1s;
+  opacity: 1;
+}
+
+.welcome-message.fade-out {
+  opacity: 0;
+}
+
+
+
+/* 返回顶部按钮 */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #E0E0E0;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 100;
+  border: none;
+}
+
+#backToTop:hover {
+  background-color: #CCFFCC;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#backToTop i {
+  font-size: 1.2rem;
+}
+
+
+/* 不让按钮贴边 */
+.navbar-nav.navbar-right {
+  margin-right: 15px;
+}
+
+.navbar-nav.navbar-right .navbar-btn {
+  margin-right: 15px;
 }

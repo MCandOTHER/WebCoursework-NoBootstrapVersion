@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- 导航栏头部（用于移动端折叠按钮） -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#custom-navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- 导航链接分组（居左内容） -->
+      <div class="collapse navbar-collapse" id="custom-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="./index.html">Lobby</a></li>
+          <li><a href="./about.html">About Me</a></li>
+          <li><a href="https://github.com/MCandOTHER" target="_blank">MyGithub</a></li>
+          <li><a href="./quiz.html">Game</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <button id="modeToggle" class="btn btn-default navbar-btn" style="margin-left:10px;">🌙 DarkMode</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 左图右文 -->
+  <div id="introCard" style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin: 60px auto 0; max-width: 1100px;">
+    <div style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:67.5%; max-width:810px; min-height:315px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:16px;">
+      <!-- 左侧图片部分 -->
+      <div style="flex:1; padding:40px 30px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="image-container" style="width:100%; margin-bottom:20px;">
+          <img src="img/CTF.png" alt="CTF代码界面" class="focus-image" style="width:100%; height:320px; object-fit:cover;">
+        </div>
+      </div>
+
+      <!-- 右侧文本部分 -->
+      <div style="flex:1; padding:40px 30px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="margin-top:0; text-align:center; width:100%;">About Me</h2>
+        <p style="font-size: 1.15rem; line-height: 1.9;">
+
+        </p>
+        <ul style="list-style:none; padding:0; font-size:1.1rem; margin:0;">
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" aria-label="返回顶部">
+    <span style="font-size:2.5rem;line-height:1;color:#FF6666;">↑</span>
+  </button>
+
+  <script src="./js/scripts.js"></script>
+</body>
+
+</html>
