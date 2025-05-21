@@ -96,3 +96,33 @@ document.getElementById('backToTop').addEventListener('click', function () {
     behavior: 'smooth'
   });
 });
+
+// 添加动画观察器
+document.addEventListener('DOMContentLoaded', function () {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // 当元素进入视口
+      if (entry.isIntersecting) {
+        const animateElement = entry.target.querySelector('.animate-element');
+        if (animateElement) {
+          // 重置动画
+          animateElement.classList.remove('slide-in');
+          animateElement.classList.add('slide-reset');
+
+          // 强制重排后添加动画
+          setTimeout(() => {
+            animateElement.classList.remove('slide-reset');
+            animateElement.classList.add('slide-in');
+          }, 10);
+        }
+      }
+    });
+  }, {
+    threshold: 0.2 // 当元素20%可见时触发
+  });
+
+  // 观察所有触发器
+  document.querySelectorAll('.scroll-trigger').forEach(trigger => {
+    observer.observe(trigger);
+  });
+});
