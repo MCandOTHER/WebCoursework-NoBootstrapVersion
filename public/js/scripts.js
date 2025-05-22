@@ -13,6 +13,10 @@ function setDarkMode(on) {
   // 保存主题偏好到 localStorage
   localStorage.setItem('darkMode', on);
 
+  const cards = document.querySelectorAll('.intro-card');
+  const introCard = document.querySelector('#introCard');
+  const ctfCard = document.querySelector('#ctfCard');  // 添加新卡片选择器
+
   if (on) {
     document.body.classList.remove('light-mode');
     document.body.classList.add('dark-mode');
@@ -23,6 +27,18 @@ function setDarkMode(on) {
     btn.classList.add('btn-warning');
     introCard.style.background = CardDarkBg;
     introCard.style.color = DarkText;
+    if (introCard) {
+      introCard.style.background = CardDarkBg;
+      introCard.style.color = DarkText;
+    }
+    if (ctfCard) {  // 添加对新卡片的处理
+      ctfCard.style.background = CardDarkBg;
+      ctfCard.style.color = DarkText;
+    }
+    cards.forEach(card => {
+      card.style.background = CardDarkBg;
+      card.style.color = DarkText;
+    });
   } else {
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
@@ -33,6 +49,18 @@ function setDarkMode(on) {
     btn.classList.add('btn-default');
     introCard.style.background = CardLightBg;
     introCard.style.color = LightText;
+    if (introCard) {
+      introCard.style.background = CardLightBg;
+      introCard.style.color = LightText;
+    }
+    if (ctfCard) {  // 添加对新卡片的处理
+      ctfCard.style.background = CardLightBg;
+      ctfCard.style.color = LightText;
+    }
+    cards.forEach(card => {
+      card.style.background = CardLightBg;
+      card.style.color = LightText;
+    });
   }
 }
 

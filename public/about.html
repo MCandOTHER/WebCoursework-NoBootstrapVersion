@@ -42,10 +42,37 @@
     </div>
   </nav>
 
-  <!-- CTF简要介绍 -->
+  <!-- 头像与简要介绍 -->
   <div class="scroll-trigger"
     style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin-top: 8%;">
     <div id="introCard" class="animate-element"
+      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:36px;">
+      <!-- 左侧图片部分 -->
+      <div
+        style="flex:1; padding:50px 40px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="image-container" style="width:100%;">
+          <img src="img/WeChat.jpg" alt="微信头像" class="focus-image" style="width:100%; height:320px; object-fit:cover;">
+        </div>
+      </div>
+      <!-- 右侧文本部分 -->
+      <div
+        style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">About Me</h2>
+        <p style="font-size:22px; line-height:2;">
+          Hello! I'm a student majoring in AI.<br>
+          Trying to be a Full-stack developer.<br>
+          And struggling with machine learning.<br>
+          Love coding, reading and playing games.<br>
+          Here is my detailed self-introduction.<br>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTF简要介绍 -->
+  <div class="scroll-trigger"
+    style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin-top: 20%;">
+    <div id="ctfCard" class="animate-element"
       style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:36px;">
       <!-- 左侧图片部分 -->
       <div
@@ -57,16 +84,15 @@
       <!-- 右侧文本部分 -->
       <div
         style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">About Me</h2>
+        <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">CTF is a hard for
+          me</h2>
         <p style="font-size:22px; line-height:2;">
-          Hello! I'm a student majoring in AI.<br>
-          Currently learning Full-stack development.<br>
-          Love coding, reading and playing games.<br>
-          Feel free to explore my website!
+
         </p>
       </div>
     </div>
   </div>
+
 
   <!-- 添加更多需要动画的块 -->
   <div class="scroll-trigger" style="margin-top: 50px;">
