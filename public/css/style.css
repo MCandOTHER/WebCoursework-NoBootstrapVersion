@@ -2,7 +2,6 @@ body {
   background: #f7f9fa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-top: 70px;
-  /* 为固定导航栏留出空间 */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -41,10 +40,52 @@ body.dark-mode {
   margin-bottom: 15px;
 }
 
+/* 页面容器样式 */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  /* 让主内容区域填充剩余空间 */
+}
+
+/* Footer 样式 */
 .footer {
-  background: #e9ecef;
-  padding: 20px 0;
-  margin-top: 40px;
+  position: sticky;
+  /* 改为 sticky 定位 */
+  bottom: 0;
+  /* 固定在底部 */
+  width: 100%;
+  z-index: 2;
+  background-color: #f8f9fa;
+  padding: 15px 0;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 深色模式下的 Footer */
+body.dark-mode .footer {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+/* 调整 Footer 内部间距 */
+.footer h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 5px;
+}
+
+.footer hr {
+  border-color: #dee2e6;
+  margin: 15px 0;
 }
 
 .tags {
@@ -207,13 +248,42 @@ body.dark-mode {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
+body.dark-mode #backToTop:hover {
+  background-color: #444444;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
 #backToTop.show {
   opacity: 1;
   visibility: visible;
 }
 
+/* 箭头样式 */
 #backToTop i {
   font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* 浅色模式下箭头颜色 */
+body.light-mode #backToTop i {
+  color: #333333;
+}
+
+/* 深色模式下箭头颜色 */
+body.dark-mode #backToTop i {
+  color: #ffffff;
+}
+
+/* 浅色模式下按钮悬停时箭头颜色 */
+body.light-mode #backToTop:hover i {
+  color: #28a745;
+}
+
+/* 深色模式下按钮悬停时箭头颜色 */
+body.dark-mode #backToTop:hover i {
+  color: #ffffff;
 }
 
 
@@ -239,13 +309,76 @@ body.dark-mode {
   }
 }
 
-/* 动画类 */
 .slide-in {
   animation: slideInFromLeft 1s ease-out forwards;
 }
 
-/* 重置动画类 */
 .slide-reset {
   opacity: 0;
   transform: translateX(-100%);
+}
+
+/* 中央带状背景样式 */
+.center-strip {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 100vh;
+  z-index: 0;
+  transition: background-color 0.3s;
+}
+
+body.light-mode .center-strip {
+  background-color: #f8f9fa;
+}
+
+body.dark-mode .center-strip {
+  background-color: #2a2a2a;
+}
+
+/* Footer 中的分割线样式 */
+.footer hr {
+  border-color: #dee2e6;
+  margin: 15px 0;
+}
+
+body.dark-mode .footer hr {
+  border-color: #444;
+}
+
+body.dark-mode .footer .glyphicon {
+  color: #fff;
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  background-color: #f8f9fa;
+  padding: 15px 0;
+  margin-top: 30px;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.footer h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 5px;
+}
+
+/* 添加响应式设计支持 */
+@media (max-width: 768px) {
+  .scroll-trigger {
+    width: 90%;
+    margin: 15% auto 0;
+  }
+
+  .footer {
+    padding: 8px 0;
+  }
 }

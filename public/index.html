@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>index - Web Coursework</title>
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -42,54 +42,64 @@
     </div>
   </nav>
 
-  <!-- 欢饮信息 -->
-  <div id="welcomeMessage" class="welcome-message">
-    Welcome to my Website !
-  </div>
+  <div class="main-content">
+    <!-- 欢饮信息 -->
+    <div id="welcomeMessage" class="welcome-message">
+      Welcome to my Website !
+    </div>
 
-  <!-- 自我介绍卡片 -->
-  <div 
-    style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin-top: 8%;">
-    <div id="introCard"
-      style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:36px;">
-      <!-- 左侧：个人基本信息 -->
-      <div
-        style="flex:1; padding:50px 40px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <!-- 自我介绍卡片 -->
+    <div
+      style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin-top: 8%;">
+      <div id="introCard"
+        style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:row; overflow:hidden; transition:background 0.3s, color 0.3s; font-size:36px;">
+        <!-- 左侧：个人基本信息 -->
+        <div
+          style="flex:1; padding:50px 40px; border-right:1px solid #eee; display:flex; flex-direction:column; justify-content:center; align-items:center;">
           <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">My Information
-        </h2>
-        <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
-          <li><strong>Name: </strong>Wenrui Ma</li>
-          <li><strong>Gender: </strong>Male</li>
-          <li><strong>Major: </strong>AI</li>
-          <li><strong>School: </strong>SCNU & UoA</li>
-          <li><strong>Target: </strong>To be a Fullstack developer</li>
-          <li><strong>What's up: </strong>Studing FastAPI</li>
-        </ul>
-      </div>
-      <!-- 右侧：兴趣爱好 -->
-      <div
-        style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-        <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">My Hobbies
-        </h2>
-        <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
-          <li>🎵 Listening to music</li>
-          <li>📚 Reading Sci-fi novels</li>
-          <li>🏸 Playing Badminbton</li>
-          <li>💻 Coding</li>
-          <li>😇 Struggling to learn CTF</li>
-          <li>🎮 Playing video games</li>
-        </ul>
+          </h2>
+          <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
+            <li><strong>Name: </strong>Wenrui Ma</li>
+            <li><strong>Gender: </strong>Male</li>
+            <li><strong>Major: </strong>AI</li>
+            <li><strong>School: </strong>SCNU & UoA</li>
+            <li><strong>Target: </strong>To be a Fullstack developer</li>
+            <li><strong>What's up: </strong>Studing FastAPI</li>
+          </ul>
+        </div>
+        <!-- 右侧：兴趣爱好 -->
+        <div
+          style="flex:1; padding:50px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <h2 style="margin-top:0; text-align:center; width:100%; font-size:40px; margin-bottom:35px;">My Hobbies
+          </h2>
+          <ul style="list-style:none; padding:0; font-size:18px; line-height:2;">
+            <li>🎵 Listening to music</li>
+            <li>📚 Reading Sci-fi novels</li>
+            <li>🏸 Playing Badminbton</li>
+            <li>💻 Coding</li>
+            <li>😇 Struggling to learn CTF</li>
+            <li>🎮 Playing video games</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-
-  <!-- 自我介绍卡片下方的小字提示 -->
-  <div
-    style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 24px; color: #999; text-align: center; width: 100%;">
-    <p> Try the buttons on the page!  </p>
-  </div>
-
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Contact Information</h4>
+          <ul class="list-unstyled">
+            <li><i class="glyphicon glyphicon-envelope"></i> WeChat: AlexTheITCrown</li>
+            <li><i class="glyphicon glyphicon-globe"></i> GitHub: MCandOTHER</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </footer>
 
   <script src="./js/scripts.js"></script>
 </body>

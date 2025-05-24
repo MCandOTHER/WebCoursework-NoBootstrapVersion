@@ -16,6 +16,9 @@ function setDarkMode(on) {
   const cards = document.querySelectorAll('.intro-card');
   const introCard = document.querySelector('#introCard');
   const ctfCard = document.querySelector('#ctfCard');  // 添加新卡片选择器
+  const gameCard = document.querySelector('#gameCard');
+  const centerStrip = document.querySelector('.center-strip');
+  const backToTopBtn = document.querySelector('#backToTop');
 
   if (on) {
     document.body.classList.remove('light-mode');
@@ -31,14 +34,25 @@ function setDarkMode(on) {
       introCard.style.background = CardDarkBg;
       introCard.style.color = DarkText;
     }
-    if (ctfCard) {  // 添加对新卡片的处理
+    if (ctfCard) {
       ctfCard.style.background = CardDarkBg;
       ctfCard.style.color = DarkText;
+    }
+    if (gameCard) {  // 添加对新卡片的处理
+      gameCard.style.background = '#2a2a2a';
+      gameCard.style.color = '#ffffff';
     }
     cards.forEach(card => {
       card.style.background = CardDarkBg;
       card.style.color = DarkText;
     });
+    if (centerStrip) {
+      centerStrip.style.backgroundColor = '#2a2a2a';
+    }
+    if (backToTopBtn) {
+      backToTopBtn.style.backgroundColor = '#333333';
+      backToTopBtn.style.color = '#ffffff';
+    }
   } else {
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
@@ -57,10 +71,21 @@ function setDarkMode(on) {
       ctfCard.style.background = CardLightBg;
       ctfCard.style.color = LightText;
     }
+    if (gameCard) {  // 添加对新卡片的处理
+      gameCard.style.background = '#ffffff';
+      gameCard.style.color = '#333333';
+    }
     cards.forEach(card => {
       card.style.background = CardLightBg;
       card.style.color = LightText;
     });
+    if (centerStrip) {
+      centerStrip.style.backgroundColor = '#f8f9fa';
+    }
+    if (backToTopBtn) {
+      backToTopBtn.style.backgroundColor = '#ffffff';
+      backToTopBtn.style.color = '#333333';
+    }
   }
 }
 

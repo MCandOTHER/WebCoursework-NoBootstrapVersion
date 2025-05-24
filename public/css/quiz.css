@@ -1,0 +1,179 @@
+.game-screen {
+    padding: 2rem;
+    text-align: center;
+}
+
+.player-list {
+    margin: 20px auto;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 80%;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.player-item:hover {
+    background-color: #e9ecef;
+}
+
+.player-name {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.challenge-btn {
+    padding: 6px 15px;
+    margin-left: 15px;
+    border-radius: 4px;
+}
+
+.no-players {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* 深色模式适配 */
+body.dark-mode .player-list {
+    background: #333;
+}
+
+body.dark-mode .player-item {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+body.dark-mode .player-item:hover {
+    background-color: #404040;
+}
+
+body.dark-mode .no-players {
+    color: #999;
+}
+
+/* 问题区域样式 */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.option-btn {
+    padding: 15px;
+    font-size: 1.1em;
+    text-align: center;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.option-btn:hover {
+    background: #e0e0e0;
+}
+
+.option-btn.correct {
+    background: #4CAF50;
+    color: white;
+}
+
+.option-btn.wrong {
+    background: #f44336;
+    color: white;
+}
+
+.option-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* 深色模式适配 */
+body.dark-mode .option-btn {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border-color: #444;
+}
+
+body.dark-mode .option-btn:hover:not(:disabled) {
+    background-color: #404040;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#roundResult {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+#timer {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #666;
+}
+
+.game-background {
+    background-color: #E0E0E0;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+/* 挑战请求区域样式 */
+.challenge-request {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-message {
+    text-align: center;
+}
+
+.challenge-message p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.challenge-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* 深色模式适配 */
+body.dark-mode .challenge-request {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .challenge-message p {
+    color: #fff;
+}

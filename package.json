@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "description": "A simple responsive Bootstrap 3 website framework",
   "scripts": {
-    "start": "http-server ./public -p 3000 -c-1"
+    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap": "^3.4.1",
-    "http-server": "^14.1.1"
+    "express": "^5.1.0",
+    "http-server": "^14.1.1",
+    "socket.io": "^4.8.1"
   },
-  "main": "index.js",
+  "main": "server.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MCandOTHER/WebCoursework.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MCandOTHER/WebCoursework/issues"
+  },
+  "homepage": "https://github.com/MCandOTHER/WebCoursework#readme"
 }
