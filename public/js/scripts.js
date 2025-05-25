@@ -87,7 +87,35 @@ function setDarkMode(on) {
       backToTopBtn.style.color = '#333333';
     }
   }
+
+  // 更新游戏界面的深色模式
+  document.querySelectorAll('.game-screen').forEach(screen => {
+    screen.classList.toggle('dark-mode');
+  });
 }
+
+// 深色模式切换函数
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+
+  // 更新按钮文本
+  const modeToggle = document.getElementById('modeToggle');
+  if (document.body.classList.contains('dark-mode')) {
+    modeToggle.textContent = '☀️ LightMode';
+    localStorage.setItem('darkMode', 'enabled');
+  } else {
+    modeToggle.textContent = '🌙 DarkMode';
+    localStorage.setItem('darkMode', 'disabled');
+  }
+}
+
+// 页面加载时检查深色模式状态
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('modeToggle').textContent = '☀️ LightMode';
+  }
+});
 
 let dark = localStorage.getItem('darkMode') === 'true';
 btn.onclick = function () {

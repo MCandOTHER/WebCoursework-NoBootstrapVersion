@@ -1,6 +1,63 @@
+/* 游戏界面基础样式 */
+.game-screen {
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.game-background {
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+/* 浅色模式 */
+body:not(.dark-mode) .game-background {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark-mode) .score-text,
+body:not(.dark-mode) .question-text {
+    color: #2c3e50;
+}
+
+/* 深色模式 */
+body.dark-mode .game-background {
+    background-color: #2c3e50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .score-text,
+body.dark-mode .question-text {
+    color: #ecf0f1;
+}
+
+/* 选项按钮样式 */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* 按钮深色模式样式 */
+body.dark-mode .option-btn {
+    background-color: #34495e;
+    color: #ecf0f1;
+    border: 1px solid #7f8c8d;
+}
+
+body.dark-mode .option-btn:hover {
+    background-color: #2980b9;
+    border-color: #3498db;
+}
+
 .game-screen {
     padding: 2rem;
     text-align: center;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: all 0.3s ease;
 }
 
 .player-list {
@@ -80,20 +137,24 @@ body.dark-mode .no-players {
     text-align: center;
     border-radius: 8px;
     transition: all 0.3s;
+    background-color: #fff;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
 }
 
 .option-btn:hover {
-    background: #e0e0e0;
+    background-color: #3498db;
+    color: #fff;
 }
 
 .option-btn.correct {
-    background: #4CAF50;
-    color: white;
+    background-color: #2ecc71;
+    color: #fff;
 }
 
 .option-btn.wrong {
-    background: #f44336;
-    color: white;
+    background-color: #e74c3c;
+    color: #fff;
 }
 
 .option-btn:disabled {
@@ -103,9 +164,9 @@ body.dark-mode .no-players {
 
 /* 深色模式适配 */
 body.dark-mode .option-btn {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border-color: #444;
+    background-color: #34495e;
+    color: #ecf0f1;
+    border: 1px solid #7f8c8d;
 }
 
 body.dark-mode .option-btn:hover:not(:disabled) {
@@ -136,10 +197,39 @@ body.dark-mode .option-btn:hover:not(:disabled) {
 }
 
 .game-background {
-    background-color: #E0E0E0;
     padding: 20px;
     border-radius: 8px;
-    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+/* 浅色模式 */
+.game-screen .game-background {
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式 */
+.game-screen-dark .game-background {
+    background-color: #2c3e50;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 深色模式下的文字颜色 */
+.game-screen-dark .game-background .score-text,
+.game-screen-dark .game-background .question-text {
+    color: #ecf0f1;
+}
+
+/* 深色模式下的选项按钮 */
+.game-screen-dark .game-background .option-btn {
+    background-color: #34495e;
+    color: #ecf0f1;
+    border: 1px solid #7f8c8d;
+}
+
+.game-screen-dark .game-background .option-btn:hover {
+    background-color: #2980b9;
+    border-color: #3498db;
 }
 
 /* 挑战请求区域样式 */
@@ -176,4 +266,125 @@ body.dark-mode .challenge-request {
 
 body.dark-mode .challenge-message p {
     color: #fff;
+}
+
+.result-content {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+#winnerDisplay {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #f1c40f;
+}
+
+.final-scores {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+.final-scores p {
+    margin: 10px 0;
+}
+
+/* 动画效果 */
+.game-screen,
+.question-text,
+.score-text,
+.option-btn {
+    transition: all 0.3s ease;
+}
+
+.question-text {
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+.score-text {
+    color: #34495e;
+    transition: color 0.3s ease;
+}
+
+/* 深色模式样式 */
+.dark-mode .game-screen {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.dark-mode .question-text {
+    color: #ecf0f1;
+}
+
+.dark-mode .score-text {
+    color: #bdc3c7;
+}
+
+.dark-mode .option-btn {
+    background-color: #34495e;
+    color: #ecf0f1;
+    border: 1px solid #7f8c8d;
+}
+
+.dark-mode .option-btn:hover {
+    background-color: #2980b9;
+    border-color: #3498db;
+}
+
+.dark-mode .option-btn.correct {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.dark-mode .option-btn.wrong {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+/* 普通模式样式 */
+.game-screen {
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.question-text {
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+.score-text {
+    color: #34495e;
+    transition: color 0.3s ease;
+}
+
+.option-btn {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.option-btn.correct {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+.option-btn.wrong {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* 动画效果 */
+.game-screen,
+.question-text,
+.score-text,
+.option-btn {
+    transition: all 0.3s ease;
 }

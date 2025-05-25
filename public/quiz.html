@@ -46,7 +46,7 @@
   <div class="main-content">
     <!-- 主要内容区域 -->
     <div class="scroll-trigger"
-      style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin: 8% auto 0; width: 60%; font-size: 3rem;">
+      style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin: 8% auto 0; width: 60%; font-size: 2.5rem;">
       <div class="intro-card" id="introCard"
         style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:column; overflow:hidden; transition:background 0.3s, color 0.3s;">
 
@@ -61,35 +61,33 @@
 
         <!-- 玩家大厅 -->
         <div id="lobbyScreen" class="game-screen" style="display:none;">
-          <h3 class="lobby-title">在线玩家</h3>
+          <h3 class="lobby-title">Players' Lobby</h3>
 
           <!-- 添加挑战请求区域 -->
           <div id="challengeRequestArea" style="display:none;" class="challenge-request">
             <div class="challenge-message">
               <p id="challengeText"></p>
               <div class="challenge-buttons">
-                <button id="acceptChallenge" class="btn btn-success">接受挑战</button>
-                <button id="rejectChallenge" class="btn btn-danger">拒绝</button>
+                <button id="acceptChallenge" class="btn btn-success">Accept! </button>
+                <button id="rejectChallenge" class="btn btn-danger">Reject </button>
               </div>
             </div>
           </div>
 
-          <div id="playerList" class="player-list">
+          <div id="playerList" class="player-list" style="font-size: 2.5rem;">
             <!-- 玩家列表将由 JavaScript 动态填充 -->
           </div>
         </div>
 
         <!-- 游戏界面 -->
-        <div id="gameScreen" class="game-screen" style="display:none;">
+        <div id="gameScreen" class="game-screen" style="display:none; font-size: 2.5rem;">
           <div class="game-background">
             <div class="score-board">
-              <div id="player1Score">玩家1: 0分</div>
-              <div id="player2Score">玩家2: 0分</div>
-              <div id="roundInfo">第 <span id="currentRound">1</span>/5 题</div>
-              <div id="timer">准备开始...</div>
+              <div id="player1Score" class="score-text">Player 1: 0 point</div>
+              <div id="player2Score" class="score-text">Player 2: 0 point</div>
             </div>
-            <div id="questionArea">
-              <h3 id="questionText"></h3>
+            <div id="questionArea" class="question-area">
+              <h3 id="questionText" class="question-text"></h3>
               <div id="options" class="options-grid"></div>
             </div>
           </div>
@@ -97,9 +95,12 @@
 
         <!-- 结果界面 -->
         <div id="resultScreen" class="game-screen" style="display:none;">
-          <h2>游戏结果</h2>
-          <div id="finalScore"></div>
-          <button id="playAgain" class="btn btn-primary">再玩一次</button>
+          <h2>The game ended</h2>
+          <div id="gameResult" class="result-content">
+            <div id="winnerDisplay"></div>
+            <div id="finalScores"></div>
+          </div>
+          <button id="returnToLobby" class="btn btn-primary">Back to the Players' Lobby</button>
         </div>
       </div>
     </div>
