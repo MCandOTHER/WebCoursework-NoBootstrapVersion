@@ -1,4 +1,3 @@
-// 基础设置
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
@@ -60,13 +59,68 @@ const questions = [
             "HTML"
         ],
         correct: 3
-    }
+    },
+    // 题目6:下面哪一个是自带黑客工具的系统 Kali Linux
+    {
+        question: "Which of the following is a system with built-in hacking tools?",
+        options: [
+            "Kali Linux",
+            "Ubuntu",
+            "Windows",
+            "MacOS"
+        ],
+        correct: 3
+    },
+    // 题目7:下面哪一个不是编程语言 Word
+    {
+        question: "Which of the following is NOT a programming language?",
+        options: [
+            "Python",
+            "Java",
+            "C++",
+            "Word"
+        ],
+        correct: 3
+    },
+    // 题目8:下面哪一个不是网络协议 HTTP
+    {
+        question: "Which of the following is NOT a network protocol?",
+        options: [
+            "HTML",
+            "FTP",
+            "SMTP",
+            "HTTP"
+        ],
+        correct: 0
+    },
+    // 题目9:下面哪一个不是网络攻击方式 DDoS
+    {
+        question: "Which of the following is NOT a network attack method?",
+        options: [
+            "DDoS",
+            "Phishing",
+            "Spoofing",
+            "Encryption"
+        ],
+        correct: 3
+    },
+    // 题目10:下面哪一个html标签不是成对标签 <br>
+    {
+        question: "Which of the following HTML tags is NOT a pair tag?",
+        options: [
+            "<div>",
+            "<span>",
+            "<br>",
+            "<p>"
+        ],
+        correct: 2
+    },
 ];
-
-// 修改游戏状态管理
-let currentGame = null; // 使用单个游戏变量替代 games Map
+let currentGame = null;
 
 app.use(express.static('public'));
+
+
 
 // 当有新的客户端连接时触发
 io.on('connection', (socket) => {
@@ -170,13 +224,13 @@ function handleAnswer(playerId, data) {
             correctAnswer: currentQuestion.correct,
             scores: currentGame.scores,
             winner: playerId,
-            isGameOver: currentGame.scores[playerId] >= 5 || currentGame.scores[otherPlayer.id] >= 5
+            isGameOver: currentGame.scores[playerId] >= 10 || currentGame.scores[otherPlayer.id] >= 10
         });
     });
 
     // 检查是否游戏结束
     const winningPlayer = currentGame.players.find(p =>
-        (currentGame.scores[p.id] || 0) >= 5
+        (currentGame.scores[p.id] || 0) >= 10
     );
 
     if (winningPlayer) {
@@ -209,7 +263,7 @@ function startGame(player1, player2) {
             { id: player2, name: players.get(player2).name, score: 0 }
         ],
         currentQuestion: 0,
-        questions: [...questions].sort(() => Math.random() - 0.5).slice(0, 5),
+        questions: [...questions].sort(() => Math.random() - 0.5).slice(0, 10),
         answers: {},
         scores: {},
         roundStartTime: null
@@ -230,7 +284,7 @@ function startGame(player1, player2) {
     startNewRound(currentGame);
 }
 
-// 修改开始新回合函数
+// 开始新回合函数
 function startNewRound(game) {
     if (game.currentQuestion < game.questions.length) {
         game.players.forEach(player => {
@@ -305,7 +359,7 @@ function calculateRoundResult(game) {
     // 发送结果
     console.log('发送回合结果:', {
         当前分数: game.scores,
-        是否游戏结束: game.scores[winner] >= 5
+        是否游戏结束: game.scores[winner] >= 10
     });
 
     game.players.forEach(player => {
@@ -316,12 +370,12 @@ function calculateRoundResult(game) {
             answers: answers,
             currentQuestion: game.currentQuestion,
             totalQuestions: game.questions.length,
-            isGameOver: game.scores[winner] >= 5
+            isGameOver: game.scores[winner] >= 10
         });
     });
 
     // 检查游戏是否结束
-    if (game.scores[winner] >= 5) {
+    if (game.scores[winner] >= 10) {
         console.log('游戏结束:', {
             获胜者: players.get(winner).name,
             最终得分: game.scores
