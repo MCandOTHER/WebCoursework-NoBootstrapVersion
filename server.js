@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const path = require('path');
 
 const players = new Map();
 const questions = [
@@ -118,7 +119,13 @@ const questions = [
 ];
 let currentGame = null;
 
+// 定义静态文件目录
 app.use(express.static('public'));
+
+// 定义根路由
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 
 
