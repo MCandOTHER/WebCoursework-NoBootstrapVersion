@@ -371,6 +371,31 @@ body.dark-mode .footer .glyphicon {
   margin-bottom: 5px;
 }
 
+/* 自我介绍卡片样式 */
+.intro-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+  margin-top: 8%;
+}
+
+.intro-card {
+  pointer-events: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  width: 70%;
+  max-width: 1000px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+  font-size: 36px;
+}
+
 /* 添加响应式设计支持 */
 @media (max-width: 768px) {
   .scroll-trigger {
