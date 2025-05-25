@@ -108,16 +108,27 @@ socket.on('playerList', (players) => {
     updatePlayerList(players);
 });
 
-// 添加游戏开始事件监听
+// 更新计分板函数
+function updateScoreBoard(players, scores) {
+    const player1 = players[0];
+    const player2 = players[1];
+
+    const player1Score = scores ? scores[player1.id] || 0 : 0;
+    const player2Score = scores ? scores[player2.id] || 0 : 0;
+
+    document.getElementById('player1Score').textContent = `${player1.name}: ${player1Score}分`;
+    document.getElementById('player2Score').textContent = `${player2.name}: ${player2Score}分`;
+}
+
+// 修改游戏开始事件监听器
 socket.on('gameStart', (data) => {
-    console.log('收到游戏开始事件:', data); // 调试日志
+    console.log('收到游戏开始事件:', data);
     currentGame = data;
 
-    // 立即切换到游戏界面
     showGameScreen();
-    // 更新计分板
-    updateScoreBoard(data.players);
-    // 显示第一个问题
+    // 初始化计分板，传入玩家信息和初始分数
+    updateScoreBoard(data.players, {});
+
     if (data.question) {
         displayQuestion(data.question);
     }
@@ -146,15 +157,6 @@ function showGameScreen() {
     });
     // 显示游戏界面
     document.getElementById('gameScreen').style.display = 'block';
-}
-
-// 更新计分板
-function updateScoreBoard(players) {
-    const player1 = players[0];
-    const player2 = players[1];
-
-    document.getElementById('player1Score').textContent = `${player1.name}: 0分`;
-    document.getElementById('player2Score').textContent = `${player2.name}: 0分`;
 }
 
 // 用于切换显示不同游戏界面的函数
@@ -241,4 +243,15 @@ socket.on('gameStart', (data) => {
         clearInterval(currentGame.timer);
     }
     // ...existing code...
+});
+
+// 添加回合结果事件监听器
+socket.on('roundResult', (data) => {
+    console.log('收到回合结果:', data);
+
+    // 使用最新的分数更新计分板
+    updateScoreBoard(currentGame.players, data.scores);
+
+    // 显示正确答案和其他回合结果信息
+    showRoundResult(data);
 });

@@ -1,27 +1,19 @@
-// 引入 Express 框架，它是一个 Node.js Web 应用框架，用于创建 Web 服务器
 const express = require('express');
-// 创建一个 Express 应用实例
 const app = express();
-// 创建一个 HTTP 服务器，将 Express 应用包装在其中
 const http = require('http').createServer(app);
-// 引入并初始化 Socket.IO，它用于实现实时双向通信
 const io = require('socket.io')(http);
 
-// 创建两个 Map 对象来存储玩家和游戏信息
-// Map 是一种键值对的数据结构，类似于对象，但更适合频繁的增删改查
-const players = new Map();  // 存储所有在线玩家的信息
-const games = new Map();    // 存储所有正在进行的游戏
+// 存储玩家和游戏信息
+const players = new Map();
+const games = new Map();
 
 // 设置 Express 服务静态文件的目录为 'public'
-// 这样 public 文件夹中的文件（如 HTML、CSS、JS）可以直接通过 URL 访问
 app.use(express.static('public'));
 
-// 当有新的客户端连接时触发此事件
+// 当有新的客户端连接时触发
 io.on('connection', (socket) => {
-    // socket 对象代表与单个客户端的连接
-    // 每个连接的客户端都有一个唯一的 socket.id
 
-    // 监听 'join' 事件（当玩家输入名字加入游戏时触发）
+    // 处理玩家加入
     socket.on('join', (name) => {
         console.log(`玩家 ${name} 加入了游戏`);
         players.set(socket.id, {
@@ -29,14 +21,13 @@ io.on('connection', (socket) => {
             name: name,
             inGame: false
         });
-
         // 立即向所有客户端广播更新后的玩家列表
         io.emit('playerList', Array.from(players.values()));
     });
 
-    // 监听 'challenge' 事件（当玩家向其他玩家发起挑战时触发）
+    // 处理挑战请求
     socket.on('challenge', (targetId) => {
-        console.log(`玩家 ${socket.id} 向 ${targetId} 发起挑战`); // 添加调试日志
+        console.log(`玩家 ${socket.id} 向 ${targetId} 发起挑战`); // 调试
         const challenger = players.get(socket.id);
 
         if (challenger && !challenger.inGame) {
@@ -48,9 +39,9 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 监听 'challengeResponse' 事件
+    // 处理挑战响应
     socket.on('challengeResponse', (data) => {
-        console.log('收到挑战响应:', data); // 调试日志
+        console.log('收到挑战响应:', data); // 调试
 
         if (data.accept) {
             const challenger = data.challengerId;
@@ -67,16 +58,16 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 监听 'answer' 事件（当玩家回答问题时触发）
+    // 处理答题
     socket.on('answer', (data) => {
         // 处理玩家的答案
         handleAnswer(socket.id, data);
     });
 
-    // 监听 'disconnect' 事件（当玩家断开连接时触发）
+    // 处理断开连接
     socket.on('disconnect', () => {
         if (players.has(socket.id)) {
-            console.log(`玩家 ${players.get(socket.id).name} 离开了游戏`);
+            console.log(`玩家 ${players.get(socket.id).name} 离开了游戏`); // 调试
             players.delete(socket.id);
             // 广播更新后的玩家列表
             io.emit('playerList', Array.from(players.values()));
@@ -84,38 +75,74 @@ io.on('connection', (socket) => {
     });
 });
 
-// 修改题目数据结构
+// 题库
 const questions = [
+    // 题目1:下面哪一个不是git文件的类型 git pdf
     {
-        question: "什么是 JavaScript 中的闭包？",
+        question: "Which of the following is not a git file type?",
         options: [
-            "一种数据类型",
-            "一个函数及其词法环境的组合",
-            "一个对象方法",
-            "一种循环结构"
+            "git log",
+            "git stash",
+            "git pdf",
+            "git index"
+        ],
+        correct: 2
+    },
+    // 题目2:下面哪一个不是恶意软件 防火墙
+    {
+        question: "Which of the following options does NOT belong to malware?",
+        options: [
+            "Virus",
+            "Trojan",
+            "Worm",
+            "Firewall"
+        ],
+        correct: 3
+    },
+    // 题目3:下面哪一个不是操作系统 PS
+    {
+        question: "Which of the following is NOT an operating system?",
+        options: [
+            "Windows",
+            "Photoshop",
+            "Android",
+            "Linux"
         ],
         correct: 1
     },
-    // ...更多题目
+    // 题目4:下面哪一个属于攻击行为 数据库注入
+    {
+        question: "Which of the following is an attack behavior?",
+        options: [
+            "SQL Injection",
+            "Encryption",
+            "Decryption",
+            "Compression"
+        ],
+        correct: 0
+    },
+    // 题目5:下面哪一个不是数据库 html
+    {
+        question: "Which of the following is NOT a database?",
+        options: [
+            "MySQL",
+            "MongoDB",
+            "SQLite",
+            "HTML"
+        ],
+        correct: 3
+    }
 ];
 
-// 修改开始游戏的函数
+// 游戏控制函数
 function startGame(player1, player2) {
     console.log('开始游戏:', player1, player2); // 调试日志
 
     const gameId = `${player1}-${player2}`;
     const game = {
         players: [
-            {
-                id: player1,
-                name: players.get(player1).name,
-                score: 0
-            },
-            {
-                id: player2,
-                name: players.get(player2).name,
-                score: 0
-            }
+            { id: player1, name: players.get(player1).name, score: 0 },
+            { id: player2, name: players.get(player2).name, score: 0 }
         ],
         currentQuestion: 0,
         questions: [...questions].sort(() => Math.random() - 0.5).slice(0, 5),
@@ -140,7 +167,7 @@ function startGame(player1, player2) {
     startNewRound(game);
 }
 
-// 添加新的轮次开始函数
+// 开始新回合
 function startNewRound(game) {
     game.roundStartTime = Date.now();
     game.answers = {};
@@ -153,58 +180,75 @@ function startNewRound(game) {
     });
 }
 
-// 修改处理答案的函数
+// 处理答案
 function handleAnswer(playerId, data) {
     const game = findPlayerGame(playerId);
-    if (!game || game.answers[playerId]) return; // 如果已经答过题，直接返回
+    if (!game || game.answers[playerId]) return; // 已答题，直接返回
 
     game.answers[playerId] = {
         answer: data.answer,
         time: Date.now() - game.roundStartTime
     };
 
-    // 如果两个玩家都已答题，计算分数
     if (Object.keys(game.answers).length === 2) {
         calculateRoundResult(game);
     }
 }
 
-// 添加计算轮次结果的函数
+// 计算回合结果
 function calculateRoundResult(game) {
     const currentQuestion = game.questions[game.currentQuestion];
     const answers = game.answers;
     let winner = null;
 
     // 找出答对且最快的玩家
-    game.players.forEach(playerId => {
-        const playerAnswer = answers[playerId];
+    game.players.forEach(player => {
+        const playerAnswer = answers[player.id];
         if (playerAnswer.answer === currentQuestion.correct) {
             if (!winner || playerAnswer.time < answers[winner].time) {
-                winner = playerId;
+                winner = player.id;
             }
         }
     });
 
-    // 计算得分
+    // 计算得分并检查是否达到胜利条件
     if (winner) {
-        game.scores[winner] += 2;
-        const loser = game.players.find(id => id !== winner);
-        if (answers[loser].answer !== currentQuestion.correct) {
+        game.scores[winner] = (game.scores[winner] || 0) + 2;
+        const loser = game.players.find(player => player.id !== winner);
+
+        if (answers[loser.id].answer !== currentQuestion.correct) {
             game.scores[winner] += 1;
+        }
+
+        // 检查是否有玩家得分大于等于5分
+        if (game.scores[winner] >= 5) {
+            // 直接结束游戏
+            game.players.forEach(player => {
+                io.to(player.id).emit('roundResult', {
+                    correctAnswer: currentQuestion.correct,
+                    scores: game.scores,
+                    winner: winner,
+                    answers: answers,
+                    isGameOver: true
+                });
+            });
+            endGame(game);
+            return;
         }
     }
 
     // 发送轮次结果
-    game.players.forEach(pid => {
-        io.to(pid).emit('roundResult', {
+    game.players.forEach(player => {
+        io.to(player.id).emit('roundResult', {
             correctAnswer: currentQuestion.correct,
             scores: game.scores,
             winner: winner,
-            answers: answers
+            answers: answers,
+            isGameOver: false
         });
     });
 
-    // 准备下一轮或结束游戏
+    // 准备下一轮
     game.currentQuestion++;
     if (game.currentQuestion < game.questions.length) {
         setTimeout(() => startNewRound(game), 7000);
@@ -213,7 +257,7 @@ function calculateRoundResult(game) {
     }
 }
 
-// 添加结束游戏的函数
+// 结束游戏
 function endGame(game) {
     const winner = Object.entries(game.scores)
         .sort(([, a], [, b]) => b - a)[0][0];
@@ -244,5 +288,5 @@ function findPlayerGame(playerId) {
 
 // 启动服务器，监听3000端口
 http.listen(3000, () => {
-    console.log('Server running on port 3000');  // 在控制台打印启动成功消息
+    console.log('Server running on port 3000');  // 调试
 });
