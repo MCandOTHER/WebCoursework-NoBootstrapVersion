@@ -388,3 +388,97 @@ body.dark-mode .challenge-message p {
 .option-btn {
     transition: all 0.3s ease;
 }
+
+/* 游戏相关样式 */
+.custom-input {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.custom-btn {
+    padding: 8px 16px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.custom-btn:hover {
+    background-color: #0056b3;
+}
+
+.custom-btn.success {
+    background-color: #28a745;
+}
+
+.custom-btn.success:hover {
+    background-color: #218838;
+}
+
+.custom-btn.danger {
+    background-color: #dc3545;
+}
+
+.custom-btn.danger:hover {
+    background-color: #c82333;
+}
+
+.form-group {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.game-screen {
+    padding: 20px;
+    width: 100%;
+}
+
+.challenge-request {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+}
+
+.challenge-message {
+    text-align: center;
+}
+
+.challenge-buttons {
+    margin-top: 10px;
+}
+
+.player-list {
+    margin-top: 20px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.question-area {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.result-content {
+    text-align: center;
+    margin: 20px 0;
+}

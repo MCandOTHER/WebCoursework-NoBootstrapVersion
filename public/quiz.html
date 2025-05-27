@@ -3,85 +3,60 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz - Web Coursework</title>
-  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
-    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/quiz.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- 导航栏头部（用于移动端折叠按钮） -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#custom-navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-
-      <!-- 导航链接分组（居左内容） -->
-      <div class="collapse navbar-collapse" id="custom-navbar-collapse">
-        <ul class="nav navbar-nav">
+  <nav class="custom-nav">
+    <div class="nav-container">
+      <div class="nav-content">
+        <ul class="nav-list">
           <li><a href="./index.html">Lobby</a></li>
           <li><a href="./about.html">About Me</a></li>
-          <li><a href="https://github.com/MCandOTHER" target="_blank">MyGithub</a></li>
+          <li><a href="https://github.com/MCandOTHER" target="_blank" rel="noopener">MyGithub</a></li>
           <li><a href="./quiz.html">Game</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <button id="modeToggle" class="btn btn-default navbar-btn" style="margin-left:10px;">🌙 DarkMode</button>
-          </li>
-        </ul>
+        <div class="nav-right">
+          <button id="modeToggle" class="mode-toggle">🌙 Dark Mode</button>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="main-content">
-    <!-- 主要内容区域 -->
-    <div class="scroll-trigger"
-      style="position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; pointer-events: none; margin: 8% auto 0; width: 60%; font-size: 2.5rem;">
-      <div class="intro-card" id="introCard"
-        style="pointer-events: auto; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); width:70%; max-width:1000px; min-height:450px; display:flex; flex-direction:column; overflow:hidden; transition:background 0.3s, color 0.3s;">
+    <div class="background-container"></div>
 
+    <div class="intro-container" style="margin-top: 8%;">
+      <div id="introCard" class="intro-card">
         <!-- 登录界面 -->
-        <div id="loginScreen" class="game-screen" style="margin-top: 12%;">
-          <h2 class="text-center">Welcome to the Q&A game! </h2>
-          <div class="form-group" style="width: 70%; margin: 0 auto;">
-            <input type="text" id="playerName" class="form-control" placeholder="Please enter your name" required>
-            <button id="joinGame" class="btn btn-primary">Join The Game! </button>
+        <div id="loginScreen" class="game-screen">
+          <h2 class="info-title">Welcome to the Q&A game!</h2>
+          <div class="form-group">
+            <input type="text" id="playerName" class="custom-input" placeholder="Please enter your name" required>
+            <button id="joinGame" class="custom-btn">Join The Game!</button>
           </div>
         </div>
 
         <!-- 玩家大厅 -->
         <div id="lobbyScreen" class="game-screen" style="display:none;">
-          <h3 class="lobby-title">Players' Lobby</h3>
-
-          <!-- 添加挑战请求区域 -->
-          <div id="challengeRequestArea" style="display:none;" class="challenge-request">
+          <h3 class="info-title">Players' Lobby</h3>
+          <div id="challengeRequestArea" class="challenge-request" style="display:none; margin: 0 auto">
             <div class="challenge-message">
               <p id="challengeText"></p>
               <div class="challenge-buttons">
-                <button id="acceptChallenge" class="btn btn-success">Accept! </button>
-                <button id="rejectChallenge" class="btn btn-danger">Reject </button>
+                <button id="acceptChallenge" class="custom-btn success">Accept!</button>
+                <button id="rejectChallenge" class="custom-btn danger">Reject</button>
               </div>
             </div>
           </div>
-
-          <div id="playerList" class="player-list" style="font-size: 2.5rem;">
-            <!-- 玩家列表将由 JavaScript 动态填充 -->
-          </div>
+          <div id="playerList" class="player-list"></div>
         </div>
 
         <!-- 游戏界面 -->
-        <div id="gameScreen" class="game-screen" style="display:none; font-size: 2.5rem;">
-          <div class="game-background">
+        <div id="gameScreen" class="game-screen" style="display:none;">
+          <div class="game-background" style="margin-top: 5%;">
             <div class="score-board">
               <div id="player1Score" class="score-text">Player 1: 0 point</div>
               <div id="player2Score" class="score-text">Player 2: 0 point</div>
@@ -95,35 +70,30 @@
 
         <!-- 结果界面 -->
         <div id="resultScreen" class="game-screen" style="display:none;">
-          <h2>The game ended</h2>
+          <h2 class="info-title">The game ended</h2>
           <div id="gameResult" class="result-content">
             <div id="winnerDisplay"></div>
             <div id="finalScores"></div>
           </div>
-          <button id="returnToLobby" class="btn btn-primary">Back to the Players' Lobby</button>
+          <button id="returnToLobby" class="custom-btn">Back to the Players' Lobby</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h4>Contact Information</h4>
-          <ul class="list-unstyled">
-            <li><i class="glyphicon glyphicon-envelope"></i> WeChat: AlexTheITCrown</li>
-            <li><i class="glyphicon glyphicon-globe"></i> GitHub: MCandOTHER</li>
-          </ul>
-        </div>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Contact Information</h4>
+        <ul class="contact-list">
+          <li><span class="icon">✉️</span> WeChat: AlexTheITCrown</li>
+          <li><span class="icon">🌐</span> GitHub: MCandOTHER</li>
+        </ul>
       </div>
-      <hr>
+      <hr class="footer-divider">
     </div>
   </footer>
 
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="./js/scripts.js"></script>
   <script src="./js/quiz.js"></script>

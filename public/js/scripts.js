@@ -6,49 +6,27 @@ const CardLightBg = "#f3f4f6";
 const CardDarkBg = "#22272e";
 
 const btn = document.getElementById('modeToggle');
-const introCard = document.getElementById('introCard');
 
 function setDarkMode(on) {
-
-  // 保存主题偏好到 localStorage
   localStorage.setItem('darkMode', on);
 
   const cards = document.querySelectorAll('.intro-card');
   const introCard = document.querySelector('#introCard');
-  const ctfCard = document.querySelector('#ctfCard');  // 添加新卡片选择器
+  const ctfCard = document.querySelector('#ctfCard');
   const gameCard = document.querySelector('#gameCard');
-  const centerStrip = document.querySelector('.center-strip');
   const backToTopBtn = document.querySelector('#backToTop');
 
   if (on) {
     document.body.classList.remove('light-mode');
     document.body.classList.add('dark-mode');
-    document.querySelector('.navbar').classList.remove('navbar-default');
-    document.querySelector('.navbar').classList.add('navbar-inverse');
     btn.textContent = "☀️ Light Mode";
-    btn.classList.remove('btn-default');
-    btn.classList.add('btn-warning');
-    introCard.style.background = CardDarkBg;
-    introCard.style.color = DarkText;
-    if (introCard) {
-      introCard.style.background = CardDarkBg;
-      introCard.style.color = DarkText;
-    }
-    if (ctfCard) {
-      ctfCard.style.background = CardDarkBg;
-      ctfCard.style.color = DarkText;
-    }
-    if (gameCard) {  // 添加对新卡片的处理
-      gameCard.style.background = '#2a2a2a';
-      gameCard.style.color = '#ffffff';
-    }
+    btn.style.backgroundColor = "#FFCC33"; // 深色模式下，浅色模式按钮的颜色
+
     cards.forEach(card => {
       card.style.background = CardDarkBg;
       card.style.color = DarkText;
     });
-    if (centerStrip) {
-      centerStrip.style.backgroundColor = '#2a2a2a';
-    }
+
     if (backToTopBtn) {
       backToTopBtn.style.backgroundColor = '#333333';
       backToTopBtn.style.color = '#ffffff';
@@ -56,42 +34,19 @@ function setDarkMode(on) {
   } else {
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
-    document.querySelector('.navbar').classList.remove('navbar-inverse');
-    document.querySelector('.navbar').classList.add('navbar-default');
     btn.textContent = "🌙 Dark Mode";
-    btn.classList.remove('btn-warning');
-    btn.classList.add('btn-default');
-    introCard.style.background = CardLightBg;
-    introCard.style.color = LightText;
-    if (introCard) {
-      introCard.style.background = CardLightBg;
-      introCard.style.color = LightText;
-    }
-    if (ctfCard) {  // 添加对新卡片的处理
-      ctfCard.style.background = CardLightBg;
-      ctfCard.style.color = LightText;
-    }
-    if (gameCard) {  // 添加对新卡片的处理
-      gameCard.style.background = '#ffffff';
-      gameCard.style.color = '#333333';
-    }
+    btn.style.backgroundColor = "#EBEBEB"; // 浅色模式下，深色模式按钮的颜色
+
     cards.forEach(card => {
       card.style.background = CardLightBg;
       card.style.color = LightText;
     });
-    if (centerStrip) {
-      centerStrip.style.backgroundColor = '#f8f9fa';
-    }
+
     if (backToTopBtn) {
       backToTopBtn.style.backgroundColor = '#ffffff';
       backToTopBtn.style.color = '#333333';
     }
   }
-
-  // 更新游戏界面的深色模式
-  document.querySelectorAll('.game-screen').forEach(screen => {
-    screen.classList.toggle('dark-mode');
-  });
 }
 
 // 深色模式切换函数
@@ -126,26 +81,26 @@ btn.onclick = function () {
 // 页面加载时读取存储的主题设置
 setDarkMode(dark);
 
-// 整页的滚动效果
-let isScrolling = false;
-window.addEventListener('wheel', function (e) {
-  if (isScrolling) return;
-  isScrolling = true;
+// // 整页的滚动效果
+// let isScrolling = false;
+// window.addEventListener('wheel', function (e) {
+//   if (isScrolling) return;
+//   isScrolling = true;
 
-  const direction = e.deltaY > 0 ? 1 : -1;
-  const vh = window.innerHeight;
-  const curr = window.scrollY;
-  let target = Math.round(curr / vh) * vh + direction * vh;
-  target = Math.max(0, Math.min(target, document.body.scrollHeight - vh));
+//   const direction = e.deltaY > 0 ? 1 : -1;
+//   const vh = window.innerHeight;
+//   const curr = window.scrollY;
+//   let target = Math.round(curr / vh) * vh + direction * vh;
+//   target = Math.max(0, Math.min(target, document.body.scrollHeight - vh));
 
-  window.scrollTo({
-    top: target,
-    behavior: 'smooth'
-  });
+//   window.scrollTo({
+//     top: target,
+//     behavior: 'smooth'
+//   });
 
-  setTimeout(() => { isScrolling = false; }, 600);
-  e.preventDefault();
-}, { passive: false });
+//   setTimeout(() => { isScrolling = false; }, 600);
+//   e.preventDefault();
+// }, { passive: false });
 
 
 // 欢迎
@@ -163,47 +118,42 @@ document.addEventListener('DOMContentLoaded', function () {
 // 监听滚动事件，控制按钮显示/隐藏
 window.addEventListener('scroll', function () {
   const backToTopBtn = document.getElementById('backToTop');
+  if (!backToTopBtn) return;  // 添加检查
+
   if (window.scrollY > 300) {
-    backToTopBtn.classList.add('show');
+    backToTopBtn.style.display = 'flex';  // 使用 flex 而不是 block
   } else {
-    backToTopBtn.classList.remove('show');
+    backToTopBtn.style.display = 'none';
   }
 });
 
 // 点击返回顶部
-document.getElementById('backToTop').addEventListener('click', function () {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+document.addEventListener('DOMContentLoaded', function () {
+  const backToTopBtn = document.getElementById('backToTop');
+  if (!backToTopBtn) return;  // 添加检查
+
+  backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   });
 });
 
-// 添加动画观察器
+// 修改动画观察器
 document.addEventListener('DOMContentLoaded', function () {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // 当元素进入视口
       if (entry.isIntersecting) {
-        const animateElement = entry.target.querySelector('.animate-element');
-        if (animateElement) {
-          // 重置动画
-          animateElement.classList.remove('slide-in');
-          animateElement.classList.add('slide-reset');
-
-          // 强制重排后添加动画
-          setTimeout(() => {
-            animateElement.classList.remove('slide-reset');
-            animateElement.classList.add('slide-in');
-          }, 10);
-        }
+        entry.target.classList.add('slide-in');
       }
     });
   }, {
-    threshold: 0.2 // 当元素20%可见时触发
+    threshold: 0.2
   });
 
-  // 观察所有触发器
-  document.querySelectorAll('.scroll-trigger').forEach(trigger => {
-    observer.observe(trigger);
+  // 观察所有带有 animate-element 类的元素
+  document.querySelectorAll('.animate-element').forEach(element => {
+    observer.observe(element);
   });
 });

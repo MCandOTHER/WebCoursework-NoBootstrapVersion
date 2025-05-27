@@ -70,7 +70,7 @@ const questions = [
             "Windows",
             "MacOS"
         ],
-        correct: 3
+        correct: 0
     },
     // 题目7:下面哪一个不是编程语言 Word
     {
