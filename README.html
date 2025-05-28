@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Web &#x8bfe;&#x7a0b;&#x4f5c;&#x4e1a;&#x9879;&#x76ee;&#x62a5;&#x544a;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="web-课程作业项目报告">Web 课程作业项目报告</h1>
+<h2 id="一网站与-quiz-应用的整体设计">一、网站与 quiz 应用的整体设计</h2>
+<h3 id="前端页面结构">前端页面结构</h3>
+<p>网站包含多个页面，通过导航栏进行切换。导航栏提供了“Lobby”、“About Me”、“MyGithub”和“Game”四个链接。</p>
+<ul>
+<li><strong>Introduction 页面（index.html）</strong>：采用左图右文的布局，左侧展示个人基本信息，右侧为空白或预留区域。</li>
+<li><strong>About 页面（about.html）</strong>：同样是左图右文的布局，左侧展示个人头像和简要介绍，右侧介绍个人兴趣爱好等信息。</li>
+<li><strong>Quiz 页面（quiz.html）</strong>：包含登录界面、玩家大厅、游戏界面和结果界面。登录界面让玩家输入姓名加入游戏，玩家大厅显示在线玩家列表并可发起挑战，游戏界面展示题目和选项，结果界面显示游戏结果。</li>
+</ul>
+<h3 id="后端实现细节">后端实现细节</h3>
+<h4 id="客户端与服务器通信">客户端与服务器通信</h4>
+<p>使用 Node.js 和 <a href="http://Socket.IO">Socket.IO</a> 实现客户端与服务器的实时通信。服务器端使用 Express 框架搭建，通过 <code>http</code> 模块创建服务器，并使用 <a href="http://Socket.IO">Socket.IO</a> 监听客户端连接。客户端通过引入 <code>socket.io.js</code> 与服务器建立连接。</p>
+<h4 id="事件处理机制">事件处理机制</h4>
+<ul>
+<li><strong>玩家连接</strong>：当有新的客户端连接时，服务器监听 <code>connection</code> 事件。玩家输入姓名点击“Join The Game!”按钮后，客户端发送 <code>join</code> 事件给服务器，服务器将玩家信息存储在 <code>players</code> Map 中，并广播更新后的玩家列表给所有客户端。</li>
+<li><strong>挑战请求</strong>：玩家在玩家大厅点击挑战按钮，客户端发送 <code>challenge</code> 事件给服务器，服务器向目标玩家发送 <code>challengeRequest</code> 事件。目标玩家收到挑战请求后，可选择接受或拒绝。</li>
+<li><strong>答案提交</strong>：玩家在游戏界面选择答案后，客户端发送 <code>answer</code> 事件给服务器，服务器根据答案判断对错并更新分数，然后发送 <code>roundResult</code> 事件给所有玩家。</li>
+</ul>
+<h2 id="二反思部分">二、反思部分</h2>
+<h3 id="开发过程中遇到的挑战">开发过程中遇到的挑战</h3>
+<ul>
+<li><strong>实时通信实现</strong>：确保客户端与服务器之间的实时通信稳定是一个挑战，特别是在多人同时操作时，可能会出现消息丢失或延迟的问题。</li>
+<li><strong>多人游戏逻辑同步</strong>：在多人游戏中，保证所有玩家的游戏状态和分数同步是一个复杂的问题，需要处理各种异常情况，如玩家断开连接、答案提交超时等。</li>
+</ul>
+<h3 id="解决方案及经验教训">解决方案及经验教训</h3>
+<ul>
+<li><strong>实时通信实现</strong>：使用 <a href="http://Socket.IO">Socket.IO</a> 的事件机制和错误处理机制，确保消息的可靠传输。同时，对关键事件进行日志记录，方便排查问题。</li>
+<li><strong>多人游戏逻辑同步</strong>：在服务器端维护游戏状态，每次状态更新后广播给所有玩家。同时，增加心跳机制，检测玩家的连接状态，及时处理断开连接的玩家。</li>
+</ul>
+<h2 id="三参考文献">三、参考文献</h2>
+<ul>
+<li>Express 官方文档：<a href="https://expressjs.com/">https://expressjs.com/</a></li>
+<li><a href="http://Socket.IO">Socket.IO</a> 官方文档：<a href="https://socket.io/">https://socket.io/</a></li>
+<li>Node.js 官方文档：<a href="https://nodejs.org/">https://nodejs.org/</a></li>
+</ul>
+<h2 id="四genai-使用声明">四、GenAI 使用声明</h2>
+<p>本报告使用了生成式 AI 工具 ChatGPT 进行内容校对和部分语句优化，但核心结构和主要内容均由本人自主完成。</p>
+
+            
+            
+        </body>
+        </html>

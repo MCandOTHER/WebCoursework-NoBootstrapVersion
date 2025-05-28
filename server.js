@@ -176,7 +176,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    // 添加处理答题事件的监听器
+    // 处理答题事件
     socket.on('answer', (data) => {
         console.log('收到答题:', {
             玩家ID: socket.id,
@@ -198,11 +198,11 @@ io.on('connection', (socket) => {
     });
 });
 
-// 修改处理答案函数
+// 处理答案
 function handleAnswer(playerId, data) {
     if (!currentGame) {
         console.log('答案处理失败: 当前没有进行中的游戏');
-        return;
+        return;  // ai建议添加处理失败
     }
 
     const currentQuestion = currentGame.questions[currentGame.currentQuestion];
@@ -260,7 +260,7 @@ function handleAnswer(playerId, data) {
     }
 }
 
-// 修改开始游戏函数
+// 开始游戏
 function startGame(player1, player2) {
     console.log('开始游戏:', player1, player2);
 
@@ -271,9 +271,7 @@ function startGame(player1, player2) {
         ],
         currentQuestion: 0,
         questions: [...questions].sort(() => Math.random() - 0.5).slice(0, 10),
-        answers: {},
-        scores: {},
-        roundStartTime: null
+        scores: {}
     };
 
     players.get(player1).inGame = true;
@@ -299,106 +297,6 @@ function startNewRound(game) {
                 question: game.questions[game.currentQuestion]
             });
         });
-    }
-}
-
-// 查找玩家所在的游戏
-function findPlayerGame(playerId) {
-    // 遍历所有游戏，找到包含该玩家ID的游戏
-    for (const [gameId, game] of games) {
-        if (game.players.includes(playerId)) {
-            return game;
-        }
-    }
-    return null;
-}
-
-// 计算回合结果
-function calculateRoundResult(game) {
-    const currentQuestion = game.questions[game.currentQuestion];
-    const answers = game.answers;
-    let winner = null;
-
-    console.log('开始计算回合结果:', {
-        当前题目: currentQuestion.question,
-        正确答案: currentQuestion.options[currentQuestion.correct],
-        玩家答案: Object.fromEntries(
-            Object.entries(answers).map(([id, data]) => [
-                players.get(id).name,
-                {
-                    选择答案: currentQuestion.options[data.answer],
-                    用时: data.time
-                }
-            ])
-        )
-    });
-
-    // 找出答对且最快的玩家
-    game.players.forEach(player => {
-        const playerAnswer = answers[player.id];
-        if (playerAnswer && playerAnswer.answer === currentQuestion.correct) {
-            if (!winner || playerAnswer.time < answers[winner].time) {
-                winner = player.id;
-            }
-        }
-    });
-
-    // 计算得分
-    if (winner) {
-        const winnerName = players.get(winner).name;
-        game.scores[winner] = (game.scores[winner] || 0) + 2;
-        const loser = game.players.find(player => player.id !== winner);
-
-        console.log('本轮获胜者:', {
-            玩家名称: winnerName,
-            答题用时: answers[winner].time,
-            当前得分: game.scores[winner]
-        });
-
-        if (answers[loser.id].answer !== currentQuestion.correct) {
-            game.scores[winner] += 1;
-            console.log(`${winnerName} 获得额外1分(对手答错)`);
-        }
-    } else {
-        console.log('本轮无人答对');
-    }
-
-    // 发送结果
-    console.log('发送回合结果:', {
-        当前分数: game.scores,
-        是否游戏结束: game.scores[winner] >= 10
-    });
-
-    game.players.forEach(player => {
-        io.to(player.id).emit('roundResult', {
-            correctAnswer: currentQuestion.correct,
-            scores: game.scores,
-            winner: winner,
-            answers: answers,
-            currentQuestion: game.currentQuestion,
-            totalQuestions: game.questions.length,
-            isGameOver: game.scores[winner] >= 10
-        });
-    });
-
-    // 检查游戏是否结束
-    if (game.scores[winner] >= 10) {
-        console.log('游戏结束:', {
-            获胜者: players.get(winner).name,
-            最终得分: game.scores
-        });
-        endGame(game);
-        return;
-    }
-
-    // 准备下一轮
-    game.currentQuestion++;
-    if (game.currentQuestion < game.questions.length) {
-        console.log(`准备开始第 ${game.currentQuestion + 1} 题`);
-        setTimeout(() => startNewRound(game), 5000);
-    } else {
-        console.log('所有题目已答完，游戏结束');
-        endGame(game);
     }
 }
 
