@@ -49,7 +49,7 @@ body.dark-mode .info-section-left {
     border-right-color: #3a3a3a;
 }
 
-/* 添加动画相关的样式 */
+/* 动画相关样式 */
 .animate-element {
     opacity: 0;
     transform: translateY(20px);

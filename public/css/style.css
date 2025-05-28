@@ -165,9 +165,7 @@ body.dark-mode .intro-card {
   margin-top: 60px;
   border-top: 1px solid #e7e7e7;
   position: relative;
-  /* 添加定位 */
   z-index: 2;
-  /* 确保在背景图片之上 */
 }
 
 .footer-container {

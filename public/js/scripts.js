@@ -53,7 +53,7 @@ function setDarkMode(on) {
 function toggleDarkMode() {
   document.body.classList.toggle('dark-mode');
 
-  // 更新按钮文本
+  // 按下后更新按钮文本
   const modeToggle = document.getElementById('modeToggle');
   if (document.body.classList.contains('dark-mode')) {
     modeToggle.textContent = '☀️ LightMode';
@@ -78,50 +78,25 @@ btn.onclick = function () {
   setDarkMode(dark);
 };
 
-// 页面加载时读取存储的主题设置
+// 读取存储的主题设置，保证跨页面主题不变
 setDarkMode(dark);
-
-// // 整页的滚动效果
-// let isScrolling = false;
-// window.addEventListener('wheel', function (e) {
-//   if (isScrolling) return;
-//   isScrolling = true;
-
-//   const direction = e.deltaY > 0 ? 1 : -1;
-//   const vh = window.innerHeight;
-//   const curr = window.scrollY;
-//   let target = Math.round(curr / vh) * vh + direction * vh;
-//   target = Math.max(0, Math.min(target, document.body.scrollHeight - vh));
-
-//   window.scrollTo({
-//     top: target,
-//     behavior: 'smooth'
-//   });
-
-//   setTimeout(() => { isScrolling = false; }, 600);
-//   e.preventDefault();
-// }, { passive: false });
-
 
 // 欢迎
 document.addEventListener('DOMContentLoaded', function () {
   var welcomeMessage = document.getElementById('welcomeMessage');
   welcomeMessage.style.display = 'block';
-
-  // 1秒后淡出
   setTimeout(function () {
-    welcomeMessage.classList.add('fade-out');
+    welcomeMessage.classList.add('fade-out');   // 1秒后淡出
   }, 1000);
 });
-
 
 // 监听滚动事件，控制按钮显示/隐藏
 window.addEventListener('scroll', function () {
   const backToTopBtn = document.getElementById('backToTop');
-  if (!backToTopBtn) return;  // 添加检查
+  if (!backToTopBtn) return;
 
   if (window.scrollY > 300) {
-    backToTopBtn.style.display = 'flex';  // 使用 flex 而不是 block
+    backToTopBtn.style.display = 'flex';
   } else {
     backToTopBtn.style.display = 'none';
   }
@@ -130,7 +105,7 @@ window.addEventListener('scroll', function () {
 // 点击返回顶部
 document.addEventListener('DOMContentLoaded', function () {
   const backToTopBtn = document.getElementById('backToTop');
-  if (!backToTopBtn) return;  // 添加检查
+  if (!backToTopBtn) return;
 
   backToTopBtn.addEventListener('click', function () {
     window.scrollTo({
@@ -140,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// 修改动画观察器
+// 淡入效果
 document.addEventListener('DOMContentLoaded', function () {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -151,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }, {
     threshold: 0.2
   });
-
   // 观察所有带有 animate-element 类的元素
   document.querySelectorAll('.animate-element').forEach(element => {
     observer.observe(element);

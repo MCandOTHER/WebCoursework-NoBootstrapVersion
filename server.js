@@ -127,8 +127,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-
 // 当有新的客户端连接时触发
 io.on('connection', (socket) => {
     // 处理玩家加入
@@ -145,7 +143,7 @@ io.on('connection', (socket) => {
 
     // 处理挑战请求
     socket.on('challenge', (targetId) => {
-        console.log(`玩家 ${socket.id} 向 ${targetId} 发起挑战`); // 调试
+        console.log(`玩家 ${socket.id} 向 ${targetId} 发起挑战`);  // 调试
         const challenger = players.get(socket.id);
 
         if (challenger && !challenger.inGame) {
@@ -159,20 +157,20 @@ io.on('connection', (socket) => {
 
     // 处理挑战响应
     socket.on('challengeResponse', (data) => {
-        console.log('收到挑战响应:', data); // 调试
+        console.log('收到挑战响应:', data);  // 调试
 
         if (data.accept) {
             const challenger = data.challengerId;
             const accepter = socket.id;
             if (players.has(challenger) && players.has(accepter) &&
                 !players.get(challenger).inGame && !players.get(accepter).inGame) {
-                startGame(challenger, accepter); // 如果接受挑战 则开始游戏
+                startGame(challenger, accepter);   // 如果接受挑战 则开始游戏
             }
 
         } else {
             io.to(data.challengerId).emit('challengeRejected', {
                 name: players.get(socket.id).name
-            });// 如果拒绝挑战 则通知挑战者拒绝
+            });  // 如果拒绝挑战 则通知挑战者拒绝
         }
     });
 
@@ -214,14 +212,14 @@ function handleAnswer(playerId, data) {
         currentGame.scores[playerId] = (currentGame.scores[playerId] || 0) + 2;
         console.log('答题正确:', {
             玩家名称: players.get(playerId).name,
-            当前分数: currentGame.scores[playerId]
+            当前分数: currentGame.scores[playerId]  // 调试
         });
     } else {
         // 答错给对方加1分
         currentGame.scores[otherPlayer.id] = (currentGame.scores[otherPlayer.id] || 0) + 1;
         console.log('答题错误:', {
             答错玩家: players.get(playerId).name,
-            对方得分: currentGame.scores[otherPlayer.id]
+            对方得分: currentGame.scores[otherPlayer.id]  // 调试
         });
     }
 
@@ -242,7 +240,7 @@ function handleAnswer(playerId, data) {
 
     if (winningPlayer) {
         console.log('游戏结束:', {
-            获胜者: players.get(winningPlayer.id).name,
+            获胜者: players.get(winningPlayer.id).name,  // 调试
             最终得分: currentGame.scores
         });
         endGame(currentGame);
@@ -252,17 +250,17 @@ function handleAnswer(playerId, data) {
     // 准备下一题
     currentGame.currentQuestion++;
     if (currentGame.currentQuestion < currentGame.questions.length) {
-        console.log(`开始第 ${currentGame.currentQuestion} 题`);
+        console.log(`开始第 ${currentGame.currentQuestion} 题`);  // 调试
         setTimeout(() => startNewRound(currentGame), 3000);
     } else {
-        console.log('所有题目已答完，游戏结束');
+        console.log('所有题目已答完，游戏结束');  // 调试
         endGame(currentGame);
     }
 }
 
 // 开始游戏
 function startGame(player1, player2) {
-    console.log('开始游戏:', player1, player2);
+    console.log('开始游戏:', player1, player2);  // 调试
 
     currentGame = {
         players: [
@@ -281,7 +279,7 @@ function startGame(player1, player2) {
     currentGame.players.forEach(player => {
         io.to(player.id).emit('gameStart', {
             players: currentGame.players,
-            question: currentGame.questions[0]  // 删除 roundNumber
+            question: currentGame.questions[0]
         });
     });
 
@@ -300,14 +298,13 @@ function startNewRound(game) {
     }
 }
 
-// 修改游戏结束函数
+// 游戏结束
 function endGame(game) {
     game.players.forEach(player => {
         if (players.has(player.id)) {
             players.get(player.id).inGame = false;
         }
     });
-
     // 重置当前游戏
     currentGame = null;
 }

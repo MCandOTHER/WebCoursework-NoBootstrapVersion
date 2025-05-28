@@ -110,7 +110,6 @@ function updatePlayerList(players) {
             playerList.appendChild(playerElement);
         }
     });
-
     // 重新绑定挑战按钮事件
     setupChallengeButtons();
 }
@@ -157,7 +156,7 @@ function showGameResult(data) {
 
 // 修改游戏开始事件处理
 socket.on('gameStart', (data) => {
-    console.log('收到游戏开始事件:', data);
+    console.log('收到游戏开始事件:', data);  // 调试
     currentGame = data;
 
     showScreen('gameScreen');
@@ -170,14 +169,14 @@ socket.on('gameStart', (data) => {
 
 // 修改新问题事件处理
 socket.on('newQuestion', (data) => {
-    console.log('收到新问题:', data);
+    console.log('收到新问题:', data);  // 调试
     displayQuestion(data.question);
 });
 
 // 修改回合结果处理
 socket.on('roundResult', (data) => {
     console.log('收到回合结果:', {
-        正确答案索引: data.correctAnswer,
+        正确答案索引: data.correctAnswer,  // 调试
         玩家得分: data.scores,
         是否游戏结束: data.isGameOver
     });
